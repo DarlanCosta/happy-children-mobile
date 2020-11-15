@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
@@ -8,8 +8,25 @@ import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import mapMarkerImg from '../images/map-marker.png';
 
+import api from "../services/api";
+
+interface Orphanage {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
 export default function OrphanagesMap() {
+  const  [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+
   const navigation = useNavigation();
+
+  useEffect(() => {
+    api.get('orphanages').then(response => {
+      setOrphanages(response.data);
+    });
+  }, []);
 
   function handleNavigateToCreateOrphanage() {
     navigation.navigate('SelectMapPosition');
@@ -31,20 +48,27 @@ export default function OrphanagesMap() {
         }} 
         style={styles.mapStyle}
       >
-        <Marker 
-          icon={mapMarkerImg}
-          calloutAnchor={{ x: 2.7, y: 0.8 }}
-          coordinate={{ 
-            latitude: -27.2092052,
-            longitude: -49.6401092
-          }}
-        >
-          <Callout tooltip={true} onPress={handleNavigateToOrphanageDetails}>
-            <View style={styles.calloutContainer}>
-              <Text style={styles.calloutText}>Lar das meninas</Text>
-            </View>
-          </Callout>
-        </Marker>
+
+        {orphanages.map(orphanage => {
+          return (
+            <Marker 
+              key={orphanage.id}
+              icon={mapMarkerImg}
+              calloutAnchor={{ x: 2.7, y: 0.8 }}
+              coordinate={{ 
+                latitude: orphanage.latitude,
+                longitude: orphanage.longitude,
+              }}
+             >
+            <Callout tooltip={true} onPress={handleNavigateToOrphanageDetails}>
+              <View style={styles.calloutContainer}>
+                <Text style={styles.calloutText}>Lar das meninas</Text>
+              </View>
+            </Callout>
+          </Marker>
+          )
+        })}
+       
       </MapView>
 
       <View style={styles.footer}>

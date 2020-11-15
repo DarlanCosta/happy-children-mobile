@@ -11,14 +11,14 @@ export default function OrphanageDetails() {
     <ScrollView style={styles.container}>
       <View style={styles.imagesContainer}>
         <ScrollView horizontal pagingEnabled>
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
+          <Image style={styles.image} source={{ uri: 'https://thumbs.jusbr.com/filters:format(webp)/imgs.jusbr.com/publications/images/6a65999bede1391c9c1fea4a46564f26' }} />
+          <Image style={styles.image} source={{ uri: 'https://eucontador.com.br/wp-content/uploads/2019/06/Como-Montar-Uma-Creche-6-Passos-Pr%C3%A1ticos-para-Abrir-com-Sucesso.jpg' }} />
+          <Image style={styles.image} source={{ uri: 'https://tucano.org.br/wp-content/uploads/2020/01/creche.jpg' }} />
         </ScrollView>
       </View>
 
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>Orf. Esperança</Text>
+        <Text style={styles.title}>Creche Santa Clara</Text>
         <Text style={styles.description}>Presta assistência a crianças de 06 a 15 anos que se encontre em situação de risco e/ou vulnerabilidade social.</Text>
       
         <View style={styles.mapContainer}>
